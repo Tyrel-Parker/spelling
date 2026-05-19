@@ -66,7 +66,16 @@ export class Game {
     }
 
     input.addEventListener('keydown', (e) => this.onKeyDown(e))
-    canvas.addEventListener('pointerdown', () => { input.focus(); resume() })
+    canvas.addEventListener('pointerdown', () => {
+      input.focus()
+      resume()
+      if (this.state === 'MENU') {
+        this.startGame()
+      } else if (this.state === 'HIGH_SCORE_VIEW') {
+        this.state = 'MENU'
+        this.input.placeholder = 'type a word, press enter...'
+      }
+    })
 
     input.focus()
     this.loop(0)
@@ -397,7 +406,7 @@ export class Game {
     ctx.globalAlpha = pulse
     ctx.font = `${Math.round(lh * 0.68)}px monospace`
     ctx.fillStyle = '#ffffff'
-    ctx.fillText('PRESS ENTER TO START', cx, this.H * 0.88)
+    ctx.fillText('TAP TO START', cx, this.H * 0.88)
     ctx.globalAlpha = 1
     ctx.textAlign = 'left'
   }
@@ -527,7 +536,7 @@ export class Game {
     ctx.globalAlpha = pulse
     ctx.font = `${Math.round(fs * 0.68)}px monospace`
     ctx.fillStyle = '#ffffff'
-    ctx.fillText('PRESS ENTER TO CONTINUE', cx, this.H * 0.92)
+    ctx.fillText('TAP TO CONTINUE', cx, this.H * 0.92)
     ctx.globalAlpha = 1
     ctx.textAlign = 'left'
   }
