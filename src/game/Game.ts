@@ -107,24 +107,24 @@ export class Game {
   }
 
   private spawnInterval(): number {
-    return Math.max(0.7, 3.8 / this.diffMult)
-  }
-
-  private maxWords(): number {
-    return Math.min(10, Math.floor(this.diffMult * 1.6))
+    return Math.max(0.5, 3.5 / this.diffMult)
   }
 
   private wordTier(): number {
-    return Math.min(4, Math.max(0, Math.floor((this.diffMult - 1) / 0.85)))
+    return Math.min(5, Math.max(0, Math.floor((this.diffMult - 1) / 0.75)))
   }
 
   private wordSpeed(): number {
     return 38 + this.speedMult * 28
   }
 
-  private spawnWord(): void {
-    if (this.words.length >= this.maxWords()) return
+  private playBounds(): { left: number; right: number } {
+    const maxW = Math.min(this.W, 900)
+    const left = Math.floor((this.W - maxW) / 2)
+    return { left, right: left + maxW }
+  }
 
+  private spawnWord(): void {
     const tier = this.wordTier()
     const useTier = Math.random() < 0.25 && tier > 0 ? tier - 1 : tier
     const pool = WORD_TIERS[useTier]
@@ -133,7 +133,8 @@ export class Game {
     if (available.length === 0) return
 
     const text = available[Math.floor(Math.random() * available.length)]
-    this.words.push(new Word(text, this.W, useTier, this.wordSpeed(), this.fontSize()))
+    const { left, right } = this.playBounds()
+    this.words.push(new Word(text, left, right, useTier, this.wordSpeed(), this.fontSize()))
   }
 
   private startGame(): void {
@@ -287,10 +288,10 @@ export class Game {
     if (this.state !== 'PLAYING') return
 
     this.gameTime += dt
-    // Speed: +0.1 per 20s (so 2x at 200s, 3x at 400s)
-    this.speedMult = 1.0 + (this.gameTime / 20) * 0.1
-    // Difficulty: +0.1 per 25s (slightly slower — controls tier + spawn rate)
-    this.diffMult = 1.0 + (this.gameTime / 25) * 0.1
+    // Speed: +0.1 per 15s → 2x at ~150s, 3x at ~300s
+    this.speedMult = 1.0 + (this.gameTime / 15) * 0.1
+    // Difficulty: +0.1 per 12s → tier 1 at 90s, tier 2 at 180s, etc.
+    this.diffMult = 1.0 + (this.gameTime / 12) * 0.1
 
     this.spawnTimer += dt
     if (this.spawnTimer >= this.spawnInterval()) {
@@ -306,7 +307,7 @@ export class Game {
     const dead: Word[] = []
     this.words = this.words.filter(word => {
       if (word.destroyed) return false
-      word.update(dt, this.W)
+      word.update(dt)
       if (word.reachedBottom(this.H)) { dead.push(word); return false }
       return true
     })

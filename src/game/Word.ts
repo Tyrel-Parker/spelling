@@ -1,4 +1,4 @@
-const TIER_COLORS = ['#00ff88', '#00ccff', '#ffcc00', '#ff8800', '#ff4444']
+const TIER_COLORS = ['#00ff88', '#00ccff', '#ffcc00', '#ff8800', '#ff4444', '#dd44ff']
 
 export class Word {
   text: string
@@ -13,8 +13,17 @@ export class Word {
   destroyed: boolean
 
   private stepHeight: number
+  private leftBound: number
+  private rightBound: number
 
-  constructor(text: string, canvasWidth: number, tier: number, speed: number, fontSize: number) {
+  constructor(
+    text: string,
+    leftBound: number,
+    rightBound: number,
+    tier: number,
+    speed: number,
+    fontSize: number,
+  ) {
     this.text = text
     this.tier = tier
     this.speed = speed
@@ -22,36 +31,37 @@ export class Word {
     this.stepHeight = Math.round(fontSize * 1.8)
     this.destroyed = false
     this.color = TIER_COLORS[tier] ?? '#ffffff'
+    this.leftBound = leftBound
+    this.rightBound = rightBound
 
-    // Measure actual rendered width
     const tmp = document.createElement('canvas').getContext('2d')!
     tmp.font = `${fontSize}px monospace`
     this.width = tmp.measureText(text).width
 
     const pad = 12
-    const maxX = canvasWidth - this.width - pad
+    const lo = leftBound + pad
+    const hi = rightBound - this.width - pad
     this.direction = Math.random() < 0.5 ? 1 : -1
-    this.x = pad + Math.random() * Math.max(0, maxX - pad)
+    this.x = lo + Math.random() * Math.max(0, hi - lo)
     this.y = fontSize + 8
   }
 
-  update(dt: number, canvasWidth: number): void {
+  update(dt: number): void {
     const pad = 12
     this.x += this.direction * this.speed * dt
 
-    if (this.direction === 1 && this.x + this.width > canvasWidth - pad) {
-      this.x = canvasWidth - this.width - pad
+    if (this.direction === 1 && this.x + this.width > this.rightBound - pad) {
+      this.x = this.rightBound - this.width - pad
       this.direction = -1
       this.y += this.stepHeight
-    } else if (this.direction === -1 && this.x < pad) {
-      this.x = pad
+    } else if (this.direction === -1 && this.x < this.leftBound + pad) {
+      this.x = this.leftBound + pad
       this.direction = 1
       this.y += this.stepHeight
     }
   }
 
   reachedBottom(canvasHeight: number): boolean {
-    // 90px reserved for turret + margin
     return this.y > canvasHeight - 90
   }
 

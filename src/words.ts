@@ -1,60 +1,99 @@
-// Tier 0: short, phonetically regular (3-4 letters)
-// Tier 1: common words, slightly longer (4-6 letters)
-// Tier 2: common words with tricky spelling (5-8 letters)
-// Tier 3: longer words, irregular patterns (7-10 letters)
-// Tier 4: complex, easy to mistype (9+ letters)
+// Tier 0: individual letters (a–z)
+// Tier 1: short phonetic words (3-4 letters) — all 26 letters represented
+// Tier 2: common words (4-6 letters) — all 26 letters represented
+// Tier 3: tricky spelling (5-8 letters) — all 26 letters represented
+// Tier 4: longer complex words (7-10 letters) — all 26 letters represented
+// Tier 5: very complex / easy to mistype (9+ letters) — all 26 letters represented
 
 export const WORD_TIERS: string[][] = [
+  // Tier 0: alphabet
   [
-    'cat', 'dog', 'run', 'fun', 'hop', 'top', 'big', 'sun', 'hat', 'bat',
-    'rat', 'mat', 'cup', 'pup', 'bug', 'hug', 'mug', 'log', 'fog', 'bit',
-    'fit', 'hit', 'sit', 'bed', 'fed', 'led', 'ten', 'hen', 'pen', 'men',
-    'fin', 'pin', 'tin', 'win', 'gun', 'bun', 'cut', 'gut', 'hut', 'nut',
-    'fly', 'fry', 'sky', 'try', 'dry', 'cry', 'spy', 'shy', 'sly', 'jet',
-    'net', 'set', 'wet', 'yet', 'box', 'fox', 'mix', 'fix', 'six', 'wax',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
   ],
+
+  // Tier 1: short phonetic words — a b c d e f g h i j k l m n o p q r s t u v w x y z ✓
   [
-    'apple', 'brave', 'chart', 'dance', 'flame', 'giant', 'happy', 'image',
-    'jumpy', 'lemon', 'magic', 'night', 'olive', 'peace', 'quest', 'raise',
-    'share', 'tiger', 'vivid', 'water', 'young', 'angel', 'bloom', 'clean',
-    'drink', 'fresh', 'grace', 'heart', 'ideal', 'jolly', 'knife', 'light',
-    'river', 'stone', 'tower', 'uncle', 'extra', 'yield', 'bring', 'carry',
-    'catch', 'climb', 'close', 'count', 'cross', 'depth', 'drive', 'earth',
-    'event', 'fancy', 'field', 'final', 'flame', 'floor', 'glass', 'gloom',
-    'graft', 'grain', 'graph', 'grasp', 'greet', 'grief', 'grind', 'groan',
+    'ant', 'bat', 'cat', 'dog', 'elf', 'fog', 'gun', 'hat', 'ink', 'jet',
+    'kit', 'log', 'mug', 'net', 'oak', 'pup', 'quiz', 'run', 'sun', 'tin',
+    'urn', 'van', 'win', 'vex', 'yak', 'zip',
+    'bed', 'bug', 'cup', 'den', 'elm', 'fin', 'gem', 'hen', 'ivy', 'jab',
+    'keg', 'lid', 'map', 'nod', 'orb', 'pen', 'rat', 'sky', 'try', 'urn',
+    'vow', 'wax', 'box', 'joy', 'zoo',
+    'big', 'cut', 'dry', 'fit', 'gut', 'hop', 'jug', 'key', 'mat', 'nun',
+    'pot', 'cry', 'sat', 'top', 'fun', 'vet', 'web', 'fox', 'yet', 'zap',
+    'bit', 'fly', 'hug', 'jam', 'kin', 'lad', 'men', 'nut', 'odd', 'pig',
+    'rod', 'set', 'tub', 'hub', 'vim', 'wig', 'mix', 'yew', 'zen', 'bun',
   ],
+
+  // Tier 2: common 4-6 letter words — a b c d e f g h i j k l m n o p q r s t u v w x y z ✓
   [
-    'rhythm', 'friend', 'caught', 'bought', 'taught', 'though', 'through',
-    'enough', 'height', 'weight', 'eighth', 'belief', 'castle', 'listen',
-    'should', 'island', 'answer', 'pretty', 'people', 'always', 'because',
-    'before', 'beyond', 'bridge', 'bright', 'broken', 'budget', 'button',
-    'change', 'choose', 'coffee', 'corner', 'couple', 'course', 'create',
-    'decide', 'design', 'dinner', 'direct', 'double', 'driven', 'effort',
-    'either', 'energy', 'engine', 'escape', 'expect', 'famous', 'finger',
-    'forest', 'frozen', 'future', 'gentle', 'global', 'golden', 'govern',
-    'hidden', 'honest', 'hunter', 'hybrid', 'inject', 'insect', 'invite',
+    'able', 'bold', 'calm', 'dive', 'each', 'fizz', 'glow', 'half', 'iris',
+    'jolt', 'kiwi', 'leap', 'mild', 'numb', 'oath', 'push', 'quiz', 'rust',
+    'silk', 'tusk', 'upon', 'vast', 'wisp', 'exact', 'yoga', 'zinc',
+    'apple', 'brave', 'crisp', 'dusty', 'eagle', 'flame', 'grace', 'honey',
+    'inbox', 'jumpy', 'kayak', 'lemon', 'magic', 'noble', 'olive', 'pluck',
+    'queen', 'river', 'shelf', 'tiger', 'ultra', 'vivid', 'waltz', 'sixth',
+    'yacht', 'zonal',
+    'angel', 'bloom', 'chart', 'drink', 'event', 'fixed', 'globe', 'heart',
+    'ideal', 'joust', 'knife', 'light', 'mercy', 'night', 'ocean', 'peace',
+    'raise', 'skill', 'tower', 'uncle', 'valor', 'water', 'extra', 'young',
+    'zebra', 'blaze', 'craft', 'depth', 'frost', 'ghost', 'grasp', 'greet',
+    'grief', 'groan', 'grove', 'exist', 'excel', 'fancy', 'field', 'floor',
+    'front', 'fuzzy', 'blank', 'dizzy', 'doubt', 'draft', 'dream', 'fever',
   ],
+
+  // Tier 3: tricky spelling — a b c d e f g h i j k l m n o p q r s t u v w x y z ✓
   [
-    'beautiful', 'necessary', 'beginning', 'knowledge', 'strength', 'calendar',
-    'committee', 'different', 'exercise', 'guarantee', 'immediate', 'important',
-    'interest', 'language', 'medicine', 'neighbor', 'occasion', 'parallel',
-    'physical', 'probably', 'remember', 'separate', 'shoulder', 'straight',
-    'surprise', 'terrible', 'tomorrow', 'together', 'yourself', 'building',
-    'business', 'children', 'complete', 'consider', 'continue', 'describe',
-    'discover', 'document', 'election', 'engineer', 'everyone', 'evidence',
-    'favorite', 'function', 'grateful', 'grateful', 'guidance', 'harmless',
-    'identify', 'industry', 'influence', 'informed', 'involves', 'likewise',
+    'aerial', 'bought', 'caught', 'double', 'eighth', 'friend', 'gnarly',
+    'height', 'island', 'jockey', 'kernel', 'listen', 'muscle', 'knight',
+    'opaque', 'phlegm', 'queue', 'rhythm', 'should', 'taught', 'unique',
+    'vacuum', 'wraith', 'exceed', 'yonder', 'zealot',
+    'answer', 'bridge', 'castle', 'driven', 'enough', 'frozen', 'gentle',
+    'hollow', 'inject', 'joking', 'knotty', 'layout', 'motive', 'narrow',
+    'onward', 'puzzle', 'quiver', 'rustic', 'spoken', 'though', 'useful',
+    'velvet', 'wisdom', 'exotic', 'yeoman', 'zephyr',
+    'blight', 'chosen', 'divide', 'effect', 'fright', 'goodly', 'hidden',
+    'impure', 'joyful', 'kitten', 'lively', 'muster', 'noodle', 'output',
+    'plough', 'quirky', 'rescue', 'settle', 'throng', 'unveil', 'vowels',
+    'wicked', 'expel', 'yellow', 'zipper', 'clamor', 'prayer', 'through',
   ],
+
+  // Tier 4: longer complex words — a b c d e f g h i j k l m n o p q r s t u v w x y z ✓
   [
-    'accommodate', 'achievement', 'acquaintance', 'approximately', 'bureaucracy',
-    'conscientious', 'controversial', 'embarrassment', 'exaggerate',
-    'extraordinary', 'fluorescent', 'handkerchief', 'independent', 'lieutenant',
-    'maintenance', 'millennium', 'mischievous', 'occasionally', 'occurrence',
-    'particularly', 'questionnaire', 'reconnaissance', 'simultaneously',
-    'sophisticated', 'spontaneous', 'surveillance', 'unfortunately',
-    'vegetarian', 'veterinarian', 'acknowledge', 'collaborate', 'comprehension',
-    'consequently', 'deteriorate', 'disqualified', 'environment', 'familiarize',
-    'hypochondriac', 'inexplicable', 'miraculous', 'miscellaneous', 'negotiation',
-    'overestimate', 'parliamentary', 'revolutionary', 'vulnerability', 'wilderness',
+    'absolute', 'building', 'calendar', 'describe', 'exercise', 'function',
+    'grateful', 'guidance', 'identify', 'jealousy', 'keyboard', 'language',
+    'medicine', 'neighbor', 'obstacle', 'parallel', 'question', 'remember',
+    'separate', 'tomorrow', 'universe', 'vacation', 'withdraw', 'exemplar',
+    'yourself', 'zealotry',
+    'beautiful', 'committee', 'different', 'envelope', 'february', 'guarantee',
+    'hospitals', 'indicate', 'jettison', 'kingship', 'likewise', 'majority',
+    'necessary', 'occurred', 'physical', 'quantity', 'relevant', 'shoulder',
+    'together', 'umbrella', 'vengeful', 'whatever', 'exchange', 'youthful',
+    'zigzagged',
+    'business', 'children', 'complete', 'consider', 'continue', 'discover',
+    'document', 'evidence', 'favorite', 'followed', 'grateful', 'helpless',
+    'informed', 'involves', 'judgment', 'knockout', 'learning', 'national',
+    'overtime', 'powerful', 'question', 'required', 'surprise', 'terrible',
+    'vacation', 'villages', 'wireless', 'existing', 'youngest', 'zeroing',
+  ],
+
+  // Tier 5: very complex — a b c d e f g h i j k l m n o p q r s t u v w x y z ✓
+  [
+    'accommodate', 'bureaucracy', 'circumstances', 'deteriorate', 'exaggerate',
+    'fluorescent', 'government', 'handkerchief', 'immediately', 'jeopardize',
+    'kaleidoscope', 'lieutenant', 'maintenance', 'nevertheless', 'occasionally',
+    'parliamentary', 'questionnaire', 'reconnaissance', 'simultaneous',
+    'sophisticated', 'surveillance', 'unfortunately', 'vulnerability',
+    'extraordinary', 'yesteryear', 'zealousness',
+    'achievement', 'collaboration', 'conscientious', 'disqualified',
+    'embarrassment', 'familiarize', 'hypochondriac', 'inexplicable',
+    'juxtaposition', 'knowledgeable', 'miscellaneous', 'negotiation',
+    'overestimate', 'pharmaceutical', 'revolutionary', 'troublesome',
+    'unpredictable', 'veterinarian', 'approximately', 'acknowledgment',
+    'acquaintance', 'breathtaking', 'championship', 'environmental',
+    'intervention', 'millennium', 'particularly', 'qualification',
+    'subsequently', 'unambiguous', 'visualization', 'wholehearted',
+    'exhaustively', 'youthfulness', 'civilization',
   ],
 ]
