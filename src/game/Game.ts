@@ -21,7 +21,7 @@ interface Star {
   r: number
 }
 
-const EXTRA_LIFE_INTERVAL = 5000
+const EXTRA_LIFE_INTERVAL = 50000
 const MAX_LIVES = 5
 const INPUT_AREA_HEIGHT = 60
 
