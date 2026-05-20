@@ -72,12 +72,12 @@ export class Game {
       if (this.state === 'MENU') {
         this.startGame()
       } else if (this.state === 'HIGH_SCORE_VIEW') {
-        this.startGame()
+        this.state = 'MENU'
+        this.input.placeholder = 'press enter to start'
       }
     })
 
     input.focus()
-    this.startGame()
     this.loop(0)
   }
 
@@ -272,7 +272,7 @@ export class Game {
     }
 
     if (this.state === 'HIGH_SCORE_VIEW') {
-      if (e.key === 'Enter') { e.preventDefault(); this.startGame() }
+      if (e.key === 'Enter') { e.preventDefault(); this.state = 'MENU'; this.input.placeholder = 'press enter to start' }
       return
     }
 
